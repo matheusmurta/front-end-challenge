@@ -1,0 +1,74 @@
+<ul>
+  <li>Calendario</li>
+  <li>Relatorio</li>
+  <li>Configurações</li>
+</ul>
+
+
+<div class="row">
+  <div class="container pb-5">
+      <button class="btn btn-success float-right" (click)="open(content)">Novo</button>
+  </div>
+</div>
+
+
+<h1>My calendar Component Teste</h1>
+
+<div class="container">
+  <div *ngIf="calendarOptions">
+    <ng-fullcalendar #ucCalendar [options]="calendarOptions" (eventClick)="eventClick($event.detail)" (eventDrop)="updateEvent($event.detail)"
+        (eventResize)="updateEvent($event.detail)" (clickButton)="clickButton($event.detail)"></ng-fullcalendar>
+</div>
+</div>
+
+
+<p>Display event : {{displayEvent | json}}</p>
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Novo Evento</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="form-group">
+        <label for="dateOfBirth">Titulo</label>
+        <div class="input-group">
+          <input type="text" class="form-control">
+          <div class="input-group-append">
+            <button class="btn btn-outline-secondary calendar" (click)="dp.toggle()" type="button"></button>
+          </div>
+        </div>
+        <label for="dateOfBirth">Início</label>
+        <div class="input-group">
+          <input id="dateOfBirth" class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #dp="ngbDatepicker">
+          <div class="input-group-append">
+            <button class="btn btn-outline-secondary calendar" (click)="dp.toggle()" type="button"></button>
+          </div>
+        </div>
+        <label for="dateOfBirth">Fim</label>
+        <div class="input-group">
+          <input id="dateOfBirth" class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #dp="ngbDatepicker">
+          <div class="input-group-append">
+            <button class="btn btn-outline-secondary calendar" (click)="dp.toggle()" type="button"></button>
+          </div>
+        </div>
+        <label for="dateOfBirth">Status</label>
+        <div class="input-group">
+          <select class="form-control">
+            <option>Default select</option>
+          </select>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-success" (click)="modal.close('Save click')">Salvar</button>
+  </div>
+</ng-template>
+
+<hr>
+
+<pre>{{closeResult}}</pre>

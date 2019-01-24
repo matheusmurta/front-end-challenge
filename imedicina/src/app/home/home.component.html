@@ -1,0 +1,14 @@
+﻿<h1>Olá {{currentUser.firstName}}!</h1>
+
+<ul>
+    <li *ngFor="let user of users">
+       Usuario - {{user.username}} ({{user.firstName}} {{user.lastName}})
+        - <a (click)="deleteUser(user.id)" class="text-danger">Delete</a>
+    </li>
+</ul>
+<p><a [routerLink]="['/login']">Sair</a></p>  
+<app-sidebar></app-sidebar>
+<app-my-calendar></app-my-calendar>
+<app-report></app-report>
+
+ 
