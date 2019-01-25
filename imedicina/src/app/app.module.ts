@@ -21,6 +21,9 @@ import { HomeComponent } from './home/home.component';
 import { ReportComponent } from './report/report.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { MyCalendarComponent } from './my-calendar/my-calendar.component';
+import { EventFormComponent } from './event/event-form/event-form.component';
+import { EventDetailComponent } from './event/event-detail/event-detail.component';
+import { EventRemoveComponent } from './event/event-remove/event-remove.component';
 
 @NgModule({
   imports: [
@@ -40,7 +43,7 @@ declarations: [
     RegisterComponent,
     ReportComponent, 
     SidebarComponent, 
-    MyCalendarComponent
+    MyCalendarComponent, EventFormComponent, EventDetailComponent, EventRemoveComponent
 ],
 providers: [
     AuthGuard,

@@ -18,21 +18,21 @@ export class ReportComponent implements OnInit {
    constructor(protected eventService: EventService) { }
  
    ngOnInit() {
-     this.eventService.getEvents().subscribe(data => {
+    //  this.eventService.getEvents().subscribe(data => {
        
-       this.events = data; 
+    //    this.events = data; 
  
-       this.calendarOptions = {
-         editable: true,
-         eventLimit: false,
-         header: {
-           left: 'prev,next today',
-           center: 'title',
-           right: 'month,agendaWeek,agendaDay,listMonth'
-         },
-         events: data
-       };
-     });
+    //    this.calendarOptions = {
+    //      editable: true,
+    //      eventLimit: false,
+    //      header: {
+    //        left: 'prev,next today',
+    //        center: 'title',
+    //        right: 'month,agendaWeek,agendaDay,listMonth'
+    //      },
+    //      events: data
+    //    };
+    //  });
    }
    clickButton(model: any) {
      this.displayEvent = model;
