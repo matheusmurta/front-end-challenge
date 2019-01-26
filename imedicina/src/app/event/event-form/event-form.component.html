@@ -1,3 +1,47 @@
-<p>
-  event-form works!
-</p>
+<div class="container p-5">
+    <div class="p-5">
+        <div class="form-group">
+            <label for="id">id</label>
+            <input type="text" class="form-control" name="id" [(ngModel)]="event.id" #id="ngModel"  required />
+          </div>
+          
+          <div class="form-group">
+            <label for="title">Titulo</label>
+            <input type="text" class="form-control" name="title" [(ngModel)]="event.title" #title="ngModel"  required />
+          </div>
+          
+          <div class="form-group">
+            <label for="start">Inicio</label>
+            <input type="date" class="form-control" name="start" [(ngModel)]="event.start"  #start="ngModel"  required />
+          </div>
+          
+          <div class="form-group">
+            <label for="start">Hora Inicio</label>
+            <input type="time" class="form-control"  required />
+          </div>
+          
+          
+          <div class="form-group">
+            <label for="end">Fim</label>
+            <input type="date" class="form-control" name="end" [(ngModel)]="event.end" #end="ngModel"  required />
+          </div>
+          
+          <div class="form-group">
+            <label for="start">Hora Fim</label>
+            <input type="time" class="form-control"  required />
+          </div>
+          
+          
+          
+          <div class="form-group">
+            <label for="status">Status</label>
+            <input type="text" class="form-control" name="status" [(ngModel)]="event.status" #status="ngModel"  required />
+          </div>
+          
+          <button (click)="addEvent()">adicionar</button>
+          <button (click)="updateEvent(1)">Editar</button>
+          <button (click)="destroyEvent(1)">Excluir</button>
+          <button (click)="getEvent(2)">Get by id</button>
+  
+    </div>
+  </div>

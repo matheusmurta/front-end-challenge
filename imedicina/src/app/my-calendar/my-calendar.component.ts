@@ -1,133 +1,64 @@
 import { Component, OnInit, ViewChild, ChangeDetectionStrategy } from '@angular/core';
-import { Platform } from '@angular/cdk/platform';
-import { DateTimeAdapter, OWL_DATE_TIME_LOCALE, OwlDateTimeIntl } from 'ng-pick-datetime';
-import { NativeDateTimeAdapter } from 'ng-pick-datetime/date-time/adapter/native-date-time-adapter.class';
 import { CalendarComponent } from 'ng-fullcalendar';
 import { Options } from 'fullcalendar';
 import { EventService } from '../_services';
 //import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 //import { EventDetailComponent } from '../event/event-detail/event-detail.component';
 
-export class FrenchIntl extends OwlDateTimeIntl {
-  /** A label for the up second button (used by screen readers).  */
-  upSecondLabel = 'ajouter une seconde';
-
-  /** A label for the down second button (used by screen readers).  */
-  downSecondLabel = 'moins une seconde';
-
-  /** A label for the up minute button (used by screen readers).  */
-  upMinuteLabel = 'ajouter une minute';
-
-  /** A label for the down minute button (used by screen readers).  */
-  downMinuteLabel = 'moins une minute';
-
-  /** A label for the up hour button (used by screen readers).  */
-  upHourLabel = 'ajouter une heure';
-
-  /** A label for the down hour button (used by screen readers).  */
-  downHourLabel = 'moins une heure';
-
-  /** A label for the previous month button (used by screen readers). */
-  prevMonthLabel = 'le mois précédent';
-
-  /** A label for the next month button (used by screen readers). */
-  nextMonthLabel = 'le mois prochain';
-
-  /** A label for the previous year button (used by screen readers). */
-  prevYearLabel = 'année précédente';
-
-  /** A label for the next year button (used by screen readers). */
-  nextYearLabel = 'l\'année prochaine';
-
-  /** A label for the previous multi-year button (used by screen readers). */
-  prevMultiYearLabel = 'Previous 21 years';
-
-  /** A label for the next multi-year button (used by screen readers). */
-  nextMultiYearLabel = 'Next 21 years';
-
-  /** A label for the 'switch to month view' button (used by screen readers). */
-  switchToMonthViewLabel = 'Change to month view';
-
-  /** A label for the 'switch to year view' button (used by screen readers). */
-  switchToMultiYearViewLabel = 'Choose month and year';
-
-  /** A label for the cancel button */
-  cancelBtnLabel = 'Cancelar';
-
-  /** A label for the set button */
-  setBtnLabel = 'Confirmar';
-
-  /** A label for the range 'from' in picker info */
-  rangeFromLabel = 'From';
-
-  /** A label for the range 'to' in picker info */
-  rangeToLabel = 'To';
-
-  /** A label for the hour12 button (AM) */
-  hour12AMLabel = 'AM';
-
-  /** A label for the hour12 button (PM) */
-  hour12PMLabel = 'PM';
-}
-
-
-
 @Component({
   selector: 'app-my-calendar',
   templateUrl: './my-calendar.component.html',
   styleUrls: ['./my-calendar.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [EventService,[
-    {provide: OWL_DATE_TIME_LOCALE, useValue: 'pt-br'},
-    {provide: DateTimeAdapter, useClass: NativeDateTimeAdapter, deps: [OWL_DATE_TIME_LOCALE, Platform]},
-    {provide: OwlDateTimeIntl, useClass: FrenchIntl},
-  ]]
+  providers: [EventService]
 })
 export class MyCalendarComponent implements OnInit {
 
   public events;
   public newEvent;
   public event: any = {};
-  public dateTime: any;
   public displayEvent :any = {}
-  public events2;
-
-  
 
   calendarOptions: Options;
 
   @ViewChild(CalendarComponent) ucCalendar: CalendarComponent;
-  constructor(protected eventService: EventService) {
-    this.dateTime = null;  
-
-   }
+  constructor(protected eventService: EventService) {}
 
   getEvents() {
-    this.events2 = {
-      "events": [
-        {
-          "title": "event1",
-          "start": "2019-01-26T18:30:00",
-          "color": "red",
-          "textColor": "white",
-          "status": "hahah"
+    this.eventService.get().then(dataSource => {
+      this.events = dataSource
+        this.calendarOptions = {
+        monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+        monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+        dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sabado'],
+        dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'],
+        allDayText: 'Eventos do dia',
+        allDaySlot: false,  
+        slotLabelFormat:"HH:mm",
+
+       // axisFormat: 'HH:mm',
+        buttonText: {
+            prev: "<",
+            next: ">",
+            prevYear: "<<",
+            nextYear: ">>",
+            today: "Hoje",
+            month: "Mês",
+            week: "Semana",
+            day: "Dia",
         },
-        {
-          "title": "event2",
-          "start": "2019-01-27",
-          "end": "2019-01-28"
+        editable: true,
+        eventLimit: false,
+        header: {
+          left: 'agendaWeek,agendaDay',
+          center: 'title',
+          right: 'prev,next,today '
         },
-        {
-          "title": "event3",
-          "start": "2019-01-08T12:30:00"
-        }
-      ]
-    }
-    
-    return this.eventService.get().then(events => {
-      console.log(events)
-      this.events = events;
+        defaultView: 'agendaWeek',
+        events: dataSource
+      };
     });
+    
+    
   }
 
   addEvent() {
@@ -205,39 +136,8 @@ export class MyCalendarComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.eventService.get().then(x => {
-      console.log(x)
-      this.events = x;
-      this.calendarOptions = {
-        monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
-        monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
-        dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sabado'],
-        dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'],
-        allDayText: 'Eventos do dia',
-        allDaySlot: false,  
-       // axisFormat: 'HH:mm',
-        buttonText: {
-            prev: "<",
-            next: ">",
-            prevYear: "<<",
-            nextYear: ">>",
-            today: "Hoje",
-            month: "Mês",
-            week: "Semana",
-            day: "Dia",
-        },
-        editable: true,
-        eventLimit: false,
-        header: {
-          left: 'agendaWeek,agendaDay',
-          center: 'title',
-          right: 'prev,next,today '
-        },
-        defaultView: 'agendaWeek',
-        events: x
-      };
-    });
-    this.setOptions()
+    
+    this.getEvents()
 
     this.eventService.timeValidator({
       id: 1,
@@ -258,32 +158,22 @@ export class MyCalendarComponent implements OnInit {
 
   }
 
-
-  setOptions(){
-    
-     //Set Calendar Options
-     
-
-  }
-
   clickButton(model: any) {
     this.displayEvent = model;
   }
   eventClick(model: any) {
-
-
     model = {
       event: {
         id: model.event.id,
         start: model.event.start,
         end: model.event.end,
         title: model.event.title,
-        allDay: model.event.allDay
+        status: model.event.status
         // other params
       },
       duration: {}
     }
-    this.displayEvent = model;
+    console.log(model); 
   }
   updateEvent2(model: any) {
     model = {
