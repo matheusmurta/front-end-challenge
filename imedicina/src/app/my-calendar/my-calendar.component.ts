@@ -2,8 +2,12 @@ import { Component, OnInit, ViewChild, ChangeDetectionStrategy } from '@angular/
 import { CalendarComponent } from 'ng-fullcalendar';
 import { Options } from 'fullcalendar';
 import { EventService } from '../_services';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+
 //import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
-//import { EventDetailComponent } from '../event/event-detail/event-detail.component';
+import { EventDetailComponent } from '../event/event-detail/event-detail.component';
+import { EventFormComponent } from '../event/event-form/event-form.component';
+
 
 @Component({
   selector: 'app-my-calendar',
@@ -13,6 +17,11 @@ import { EventService } from '../_services';
 })
 export class MyCalendarComponent implements OnInit {
 
+  public user = {
+    name: 'Izzat Nadiri',
+    age: 26
+  }
+
   public events;
   public newEvent;
   public event: any = {};
@@ -21,7 +30,28 @@ export class MyCalendarComponent implements OnInit {
   calendarOptions: Options;
 
   @ViewChild(CalendarComponent) ucCalendar: CalendarComponent;
-  constructor(protected eventService: EventService) {}
+  constructor(protected eventService: EventService,private modalService: NgbModal
+    ) {}
+
+    openFormModal() {
+      const modalRef = this.modalService.open(EventDetailComponent);
+      modalRef.componentInstance.user = this.user;
+      modalRef.result.then((result) => {
+        console.log(result);
+      }).catch((error) => {
+        console.log(error);
+      });
+    }
+
+    openDetailModal() {
+      const modalRef = this.modalService.open(EventFormComponent);
+      modalRef.componentInstance.user = this.user;
+      modalRef.result.then((result) => {
+        console.log(result);
+      }).catch((error) => {
+        console.log(error);
+      });
+    }
 
   getEvents() {
     this.eventService.get().then(dataSource => {

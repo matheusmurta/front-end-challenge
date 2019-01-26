@@ -35,7 +35,7 @@ import { EventRemoveComponent } from './event/event-remove/event-remove.componen
     ReactiveFormsModule,
     HttpClientModule,
     AppRoutingModule,
-    NgbModule,
+    NgbModule.forRoot(),
     FullCalendarModule,
     FormsModule,
     OwlDateTimeModule, 
@@ -63,6 +63,11 @@ providers: [
     // provider used to create fake backend
     fakeBackendProvider
 ],
-bootstrap: [AppComponent]
+bootstrap: [AppComponent],
+entryComponents: [
+    EventDetailComponent,
+    EventFormComponent,
+    EventRemoveComponent
+  ]
 })
 export class AppModule { }
