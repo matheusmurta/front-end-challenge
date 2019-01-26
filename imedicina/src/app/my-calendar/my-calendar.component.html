@@ -1,3 +1,23 @@
+
+<div class="example-wrapper">
+  <h2>Open a Picker as a Dialog</h2>
+  <label class="example-input-wrapper">
+      Date Time
+      <input placeholder="Date Time:" [(ngModel)]="dateTime"
+             [owlDateTime]="dt3" [owlDateTimeTrigger]="dt3" >
+      <owl-date-time [pickerMode]="'dialog'" #dt3></owl-date-time>
+  </label>
+
+  <h4>Value From Picker: {{dateTime}}</h4>
+</div>
+
+
+
+<hr>
+
+
+
+
 <h1>My calendar Component Teste</h1>
 <pre>Display events : {{events | json}}</pre>
 <hr>
@@ -60,6 +80,5 @@
         (eventResize)="updateEvent($event.detail)" (clickButton)="clickButton($event.detail)"></ng-fullcalendar>
 </div>
 </div>
-
 
 
