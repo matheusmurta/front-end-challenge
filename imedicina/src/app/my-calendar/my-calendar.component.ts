@@ -89,6 +89,10 @@ export class MyCalendarComponent implements OnInit {
   public newEvent;
   public event: any = {};
   public dateTime: any;
+  public displayEvent :any = {}
+  public events2;
+
+  
 
   calendarOptions: Options;
 
@@ -99,7 +103,29 @@ export class MyCalendarComponent implements OnInit {
    }
 
   getEvents() {
+    this.events2 = {
+      "events": [
+        {
+          "title": "event1",
+          "start": "2019-01-26T18:30:00",
+          "color": "red",
+          "textColor": "white",
+          "status": "hahah"
+        },
+        {
+          "title": "event2",
+          "start": "2019-01-27",
+          "end": "2019-01-28"
+        },
+        {
+          "title": "event3",
+          "start": "2019-01-08T12:30:00"
+        }
+      ]
+    }
+    
     return this.eventService.get().then(events => {
+      console.log(events)
       this.events = events;
     });
   }
@@ -179,7 +205,39 @@ export class MyCalendarComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getEvents();
+    this.eventService.get().then(x => {
+      console.log(x)
+      this.events = x;
+      this.calendarOptions = {
+        monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+        monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+        dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sabado'],
+        dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'],
+        allDayText: 'Eventos do dia',
+        allDaySlot: false,  
+       // axisFormat: 'HH:mm',
+        buttonText: {
+            prev: "<",
+            next: ">",
+            prevYear: "<<",
+            nextYear: ">>",
+            today: "Hoje",
+            month: "Mês",
+            week: "Semana",
+            day: "Dia",
+        },
+        editable: true,
+        eventLimit: false,
+        header: {
+          left: 'agendaWeek,agendaDay',
+          center: 'title',
+          right: 'prev,next,today '
+        },
+        defaultView: 'agendaWeek',
+        events: x
+      };
+    });
+    this.setOptions()
 
     this.eventService.timeValidator({
       id: 1,
@@ -201,70 +259,47 @@ export class MyCalendarComponent implements OnInit {
   }
 
 
-  // setOptions(){
-  //    //Set Calendar Options
-  //    this.calendarOptions = {
-  //     monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
-  //     monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
-  //     dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sabado'],
-  //     dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'],
-  //     allDayText: 'Eventos do dia',
-  //     buttonText: {
-  //         prev: "<",
-  //         next: ">",
-  //         prevYear: "<<",
-  //         nextYear: ">>",
-  //         today: "Hoje",
-  //         month: "Mês",
-  //         week: "Semana",
-  //         day: "Dia",
-  //     },
-  //     editable: true,
-  //     eventLimit: false,
-  //     header: {
-  //       left: 'prev,next  ',
-  //       center: 'title',
-  //       right: 'month,agendaWeek,agendaDay,listMonth'
-  //     },
-  //     events: this.events
-  //   };
+  setOptions(){
+    
+     //Set Calendar Options
+     
 
-  // }
+  }
 
-  // clickButton(model: any) {
-  //   this.displayEvent = model;
-  // }
-  // eventClick(model: any) {
+  clickButton(model: any) {
+    this.displayEvent = model;
+  }
+  eventClick(model: any) {
 
 
-  //   model = {
-  //     event: {
-  //       id: model.event.id,
-  //       start: model.event.start,
-  //       end: model.event.end,
-  //       title: model.event.title,
-  //       allDay: model.event.allDay
-  //       // other params
-  //     },
-  //     duration: {}
-  //   }
-  //   this.displayEvent = model;
-  // }
-  // updateEvent(model: any) {
-  //   model = {
-  //     event: {
-  //       id: model.event.id,
-  //       start: model.event.start,
-  //       end: model.event.end,
-  //       title: model.event.title
-  //       // other params
-  //     },
-  //     duration: {
-  //       _data: model.duration._data
-  //     }
-  //   }
-  //   this.displayEvent = model;
-  // }
+    model = {
+      event: {
+        id: model.event.id,
+        start: model.event.start,
+        end: model.event.end,
+        title: model.event.title,
+        allDay: model.event.allDay
+        // other params
+      },
+      duration: {}
+    }
+    this.displayEvent = model;
+  }
+  updateEvent2(model: any) {
+    model = {
+      event: {
+        id: model.event.id,
+        start: model.event.start,
+        end: model.event.end,
+        title: model.event.title
+        // other params
+      },
+      duration: {
+        _data: model.duration._data
+      }
+    }
+    this.displayEvent = model;
+  }
 
 
 }
