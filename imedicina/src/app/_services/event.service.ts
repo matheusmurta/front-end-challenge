@@ -20,8 +20,8 @@ let events = [
     {
         id: 3,
         title: 'Consulta3',
-        start: '2019-01-02T07:12:00.000Z',
-        end: '2019-01-02T06:22:12.000Z',
+        start: '2019-03-01T01:00:00.000Z',
+        end: '2019-03-01T02:12:12.000Z',
         status: 'progress',
         color: '#ffff7e',
     },
@@ -60,6 +60,20 @@ export class EventService {
             resolve(result);
         });
     }
+
+    timeValidator(event){
+        //valida se ja existe no array algum evento marcao neste horario
+        return new Promise(resolve => {
+            const result = events.map(x => x.start === event.start || x.start === event.end || x.end === event.start || x.end == event.end);
+            const resultTeste = result.filter(x => x == true);
+            if(resultTeste.length > 0){
+                resolve(true);
+            } else {
+                resolve(false);
+            }
+        });
+    
+      }
 
     add(data) {
         return new Promise(resolve => {
