@@ -11,14 +11,13 @@ module.exports = {
         exclude: /node_modules/
       },
       {
-        test: /\.(html|css|scss)$/,
+        test: /\.(html|css)$/,
         loader: 'raw-loader'
       },
       {
         test: /\.scss$/,
-        exclude: /node_modules/,
-        loaders: ['raw-loader', 'sass-loader'] // sass-loader not scss-loader
-      },
+        loader: ["raw-loader", "sass-loader?sourceMap"] 
+       },
     ]
   },
   resolve: {
