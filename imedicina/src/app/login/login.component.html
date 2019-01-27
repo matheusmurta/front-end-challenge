@@ -1,4 +1,4 @@
-﻿<div class="wrapper">
+﻿<!-- <div class="wrapper">
     <form class="form-signin">
             <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
                     <div class="form-group">
@@ -20,7 +20,32 @@
                     </div>
                 </form>
     </form>
+</div> -->
+
+<div class="login-page">
+    <div class="col-md-12 p-5">
+        <div class="text-center">
+            <img height="40px" src="https://app.imedicina.com.br/i/assets/img/default/logo-imedicina.png">
+        </div>
+    </div>
+    <div class="form">
+        <form class="login-form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+            <input type="text" placeholder="Usuário"  class="form-control" formControlName="username" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
+            <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+                    <div *ngIf="f.username.errors.required">Preencha o campo Usuário</div>
+                </div>
+            <input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" placeholder="Senha" />
+            <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                    <div *ngIf="f.password.errors.required">Preencha o campo Senha </div>
+                </div>
+            <button [disabled]="loading" >LOGIN</button>
+            <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+            <p class="message">Ainda não e menbro? <a [routerLink]="['/register']">Crie sua conta</a></p>
+        </form>
+    </div>
+    <p class="text-center ">
+        <span class="text-white">iMedicina - Todos os direitos reservados </span>
+        <span class="text-white">©</span><span class="text-white" id="current-year"> 2018</span><br>
+        <a href="http://imedicina.com.br/termo-e-condicoes-gerais-de-uso-do-imedicina/">Termos de uso</a>
+    </p>
 </div>
-
-
-
