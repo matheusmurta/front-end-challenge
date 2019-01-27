@@ -17,64 +17,58 @@ import { EventFormComponent } from '../event/event-form/event-form.component';
 })
 export class MyCalendarComponent implements OnInit {
 
-  public user = {
-    name: 'Izzat Nadiri',
-    age: 26
-  }
+  // public user = {
+  //   name: 'Izzat Nadiri',
+  //   age: 26
+  // }
 
   public events;
   public newEvent;
   public event: any = {};
-  public displayEvent :any = {}
+  public displayEvent: any = {}
 
   calendarOptions: Options;
 
   @ViewChild(CalendarComponent) ucCalendar: CalendarComponent;
-  constructor(protected eventService: EventService,private modalService: NgbModal
-    ) {}
+  constructor(protected eventService: EventService, private modalService: NgbModal
+  ) { }
 
-    openFormModal() {
-      const modalRef = this.modalService.open(EventDetailComponent);
-      modalRef.componentInstance.user = this.user;
-      modalRef.result.then((result) => {
-        console.log(result);
-      }).catch((error) => {
-        console.log(error);
-      });
-    }
+  openFormModal() {
 
-    openDetailModal() {
-      const modalRef = this.modalService.open(EventFormComponent);
-      modalRef.componentInstance.user = this.user;
-      modalRef.result.then((result) => {
-        console.log(result);
-      }).catch((error) => {
-        console.log(error);
-      });
-    }
+  }
+
+  // openDetailModal() {
+  //   const modalRef = this.modalService.open(EventFormComponent);
+  //   modalRef.componentInstance.user = this.user;
+  //   modalRef.result.then((result) => {
+  //     console.log(result);
+  //   }).catch((error) => {
+  //     console.log(error);
+  //   });
+  // }
 
   getEvents() {
     this.eventService.get().then(dataSource => {
       this.events = dataSource
-        this.calendarOptions = {
+      this.calendarOptions = {
         monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
         monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
         dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sabado'],
         dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'],
         allDayText: 'Eventos do dia',
-        allDaySlot: false,  
-        slotLabelFormat:"HH:mm",
+        allDaySlot: false,
+        slotLabelFormat: "HH:mm",
 
-       // axisFormat: 'HH:mm',
+        // axisFormat: 'HH:mm',
         buttonText: {
-            prev: "<",
-            next: ">",
-            prevYear: "<<",
-            nextYear: ">>",
-            today: "Hoje",
-            month: "Mês",
-            week: "Semana",
-            day: "Dia",
+          prev: "<",
+          next: ">",
+          prevYear: "<<",
+          nextYear: ">>",
+          today: "Hoje",
+          month: "Mês",
+          week: "Semana",
+          day: "Dia",
         },
         editable: true,
         eventLimit: false,
@@ -87,8 +81,8 @@ export class MyCalendarComponent implements OnInit {
         events: dataSource
       };
     });
-    
-    
+
+
   }
 
   addEvent() {
@@ -166,25 +160,25 @@ export class MyCalendarComponent implements OnInit {
   }
 
   ngOnInit() {
-    
+
     this.getEvents()
 
-    this.eventService.timeValidator({
-      id: 1,
-      title: 'Consulta1',
-      start: '2039-01-01T01:00:00.000Z',
-      end: '2030-01-01T02:12:12.000Z',
-      status: 'free',
-      color: '#c5eff7',
-    }).then((result) => {
-      if (result) {
-        alert('evento ja existe na base de dados')
-      }
-      else {
-        alert('evento nao exista na base de dados')
-      }
+    // this.eventService.timeValidator({
+    //   id: 1,
+    //   title: 'Consulta1',
+    //   start: '2039-01-01T01:00:00.000Z',
+    //   end: '2030-01-01T02:12:12.000Z',
+    //   status: 'free',
+    //   color: '#c5eff7',
+    // }).then((result) => {
+    //   if (result) {
+    //     alert('evento ja existe na base de dados')
+    //   }
+    //   else {
+    //     alert('evento nao exista na base de dados')
+    //   }
 
-    });
+    // });
 
   }
 
@@ -198,12 +192,18 @@ export class MyCalendarComponent implements OnInit {
         start: model.event.start,
         end: model.event.end,
         title: model.event.title,
-        status: model.event.status
-        // other params
-      },
-      duration: {}
+        status: model.event.status,
+        color: model.event.color
+      }
     }
-    console.log(model); 
+    const modalRef = this.modalService.open(EventDetailComponent);
+    modalRef.componentInstance.event = model;
+    modalRef.result.then((result) => {
+      console.log(result);
+    }).catch((error) => {
+      console.log(error);
+    });
+
   }
   updateEvent2(model: any) {
     model = {

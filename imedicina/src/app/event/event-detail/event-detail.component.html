@@ -1,59 +1,30 @@
 <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">Detalhes</h4>
-    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body">
-    <input [(ngModel)]="user.name" type="text">
-    <input [(ngModel)]="user.age" type="number">
-    <button (click)="passBack()" type="submit" class="btn btn-primary w-100">Pass back</button>
-  </div>
+  <h4 class="modal-title" id="modal-basic-title">Detalhes</h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <form>
+    <div class="form-group">
+      <label class="col-form-label">Título</label>
+      <input class="form-control" [(ngModel)]="event.event.title" type="text" name="title" disabled>
+    </div>
+    <div class="form-group">
+      <label class="col-form-label">Data e Horário de início</label>
+      <input class="form-control" [(ngModel)]="event.event.start" type="text" name="start" disabled>
+    </div>
+    <div class="form-group">
+      <label class="col-form-label">Data e Horário do Fim</label>
+      <input class="form-control" [(ngModel)]="event.event.end" type="text" name="end" disabled>
+    </div>
 
-<!-- <div class="container p-5">
-        <div class="p-5">
-            <div class="form-group">
-                <label for="id">id</label>
-                <input type="text" class="form-control" name="id" [(ngModel)]="event.id" #id="ngModel"  required />
-              </div>
-              
-              <div class="form-group">
-                <label for="title">Titulo</label>
-                <input type="text" class="form-control" name="title" [(ngModel)]="event.title" #title="ngModel"  required />
-              </div>
-              
-              <div class="form-group">
-                <label for="start">Inicio</label>
-                <input type="date" class="form-control" name="start" [(ngModel)]="event.start"  #start="ngModel"  required />
-              </div>
-              
-              <div class="form-group">
-                <label for="start">Hora Inicio</label>
-                <input type="time" class="form-control"  required />
-              </div>
-              
-              
-              <div class="form-group">
-                <label for="end">Fim</label>
-                <input type="date" class="form-control" name="end" [(ngModel)]="event.end" #end="ngModel"  required />
-              </div>
-              
-              <div class="form-group">
-                <label for="start">Hora Fim</label>
-                <input type="time" class="form-control"  required />
-              </div>
-              
-              
-              
-              <div class="form-group">
-                <label for="status">Status</label>
-                <input type="text" class="form-control" name="status" [(ngModel)]="event.status" #status="ngModel"  required />
-              </div>
-              
-              <button (click)="addEvent()">adicionar</button>
-              <button (click)="updateEvent(1)">Editar</button>
-              <button (click)="destroyEvent(1)">Excluir</button>
-              <button (click)="getEvent(2)">Get by id</button>
-      
-        </div>
-      </div> -->
+    <div class="form-group">
+      <label class="col-form-label">Status</label>
+      <input class="form-control" [(ngModel)]="event.event.status" type="text" name="color" [ngStyle]="{'background-color': event.event.color}" disabled>
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <button (click)="activeModal.dismiss('close')" type="submit" class="btn btn-info w-100">Ok</button>
+</div>

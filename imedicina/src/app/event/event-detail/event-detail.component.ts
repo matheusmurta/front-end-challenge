@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter, Input, } from '@angular/core';
+import { Component, Input, } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -9,19 +9,10 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 export class EventDetailComponent 
 {
 
-  @Input() public user;
-  @Output() passEntry: EventEmitter<any> = new EventEmitter();
+  @Input() public event;
 
   constructor(public activeModal: NgbActiveModal) { }
-
+  
   ngOnInit() {
-    console.log(this.user);
   }
-
-  passBack() {
-    alert('pass back')
-    console.log(this.user)
-    this.passEntry.emit(this.user);
-  }
-
 }
