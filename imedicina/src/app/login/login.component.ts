@@ -5,7 +5,11 @@ import { first } from 'rxjs/operators';
 
 import { AlertService, AuthenticationService } from '../_services';
 
-@Component({templateUrl: 'login.component.html'})
+@Component({
+    templateUrl: 'login.component.html',
+    styleUrls: ['./login.component.scss'],
+})
+
 export class LoginComponent implements OnInit {
     loginForm: FormGroup;
     loading = false;
@@ -17,7 +21,7 @@ export class LoginComponent implements OnInit {
         private route: ActivatedRoute,
         private router: Router,
         private authenticationService: AuthenticationService,
-        private alertService: AlertService) {}
+        private alertService: AlertService) { }
 
     ngOnInit() {
         this.loginForm = this.formBuilder.group({
