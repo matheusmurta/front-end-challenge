@@ -24,8 +24,22 @@ export class ReportComponent implements OnInit {
     this.getEvents();
   }
 
+  edit(event) {
+    const modalRef = this.modalService.open(EventFormComponent);
+    modalRef.componentInstance.event = event;
+
+    modalRef.result.then((result) => {
+      `Closed with: ${result}`;
+      alert('fechou')
+      return this.getEvents();
+
+    }, (reason) => {
+      `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+  
+
   getEvents() {
-    alert('peguei os eventos')
     this.eventService.get().then(dataSource => {
       this.events = dataSource
     });

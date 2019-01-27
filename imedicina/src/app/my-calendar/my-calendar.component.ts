@@ -76,8 +76,6 @@ export class MyCalendarComponent implements OnInit {
         events: dataSource
       };
     });
-
-
   }
 
   addEvent() {
@@ -153,6 +151,18 @@ export class MyCalendarComponent implements OnInit {
 
     modalRef.result.then((result) => {
       `Closed with: ${result}`;
+      alert('fechou')
+      this.ucCalendar.fullCalendar('removeEvents');
+      
+      this.eventService.get().then(dataSource => {
+        this.events = dataSource
+      });
+
+      this.ucCalendar.fullCalendar('addEventSource', this.events );
+      this.ucCalendar.fullCalendar('refetchEvents');
+      this.ucCalendar.fullCalendar('rerenderEvents');
+     ;
+
     }, (reason) => {
       `Dismissed ${this.getDismissReason(reason)}`;
     });

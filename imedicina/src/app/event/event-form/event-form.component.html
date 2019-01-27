@@ -1,5 +1,7 @@
 <div class="modal-header">
-  <h4 class="modal-title" id="modal-basic-title">Novo Evento</h4>
+  <h4 class="modal-title" id="modal-basic-title" *ngIf="formMode =='new'">Novo Evento</h4>
+  <h4 class="modal-title" id="modal-basic-title" *ngIf="formMode =='edit'">Editar Evento</h4>
+
   <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
     <span aria-hidden="true">&times;</span>
   </button>
@@ -14,7 +16,7 @@
     <div class="form-group">
       <label class="example-input-wrapper">
         Data e Horário de início:
-        <input placeholder="Date Time:" [(ngModel)]="event.start" [owlDateTimeTrigger]="dt" [owlDateTime]="dt" name="dt"
+        <input placeholder="Data e Hora" [(ngModel)]="event.start" [owlDateTimeTrigger]="dt" [owlDateTime]="dt" name="dt"
           class="form-control">
         <owl-date-time #dt name="dt"></owl-date-time>
       </label>
@@ -24,17 +26,21 @@
     <div class="form-group">
       <label class="example-input-wrapper">
         Data e Horário de Término :
-        <input placeholder="Date Time:" [(ngModel)]="event.end" [owlDateTimeTrigger]="dt2" [owlDateTime]="dt2" name="dt2"
+        <input placeholder="Data e Hora" [(ngModel)]="event.end" [owlDateTimeTrigger]="dt2" [owlDateTime]="dt2" name="dt2"
           class="form-control">
         <owl-date-time #dt2 name="dt2"></owl-date-time>
       </label>
     </div>
     <label class="col-form-label">Status</label>
-    <select class="form-control" [(ngModel)]="selected" name="status" placeholder="select" (ngModelChange)="onOptionsSelected()">
+    <select class="form-control" [(ngModel)]="event.status" name="status" placeholder="select" (ngModelChange)="onOptionsSelected()">
       <option *ngFor="let sta of status" [ngValue]="sta">{{sta}}</option>
     </select>
   </form>
+  <pre>
+    {{event | json}}
+  </pre>
 </div>
 <div class="modal-footer">
-  <button (click)="save()" type="button" class="btn btn-info w-100">Ok</button>
+  <button type="button" class="btn btn-danger" (click)="cancel()" data-dismiss="modal">Cancelar</button>
+  <button type="button" class="btn btn-info" (click)="save()" data-dismiss="modal">Salvar</button>
 </div>

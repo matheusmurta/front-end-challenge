@@ -92,6 +92,7 @@ export class EventFormComponent {
   @Input() public event: any = {};
   selected: any;
   filtered: any;
+  formMode: string;
   stat = [
     { value: "FREE", color: "blue" },
     { value: "BUSY", color: "red" },
@@ -102,7 +103,6 @@ export class EventFormComponent {
   status = ['FREE', 'BUSY', 'PROGRESS', 'DONE'];
 
   constructor(public activeModal: NgbActiveModal, protected eventService: EventService) {
-
     this.event = {
       id: null,
       title: null,
@@ -111,45 +111,101 @@ export class EventFormComponent {
       status: null,
       color: null
     }
-
-    console.log(this.event)
   }
 
   onOptionsSelected() {
-    this.filtered = this.stat.filter(t => t.value == this.selected);
+    this.filtered = this.stat.filter(t => t.value == this.event.status);
     this.event.status = this.filtered[0].value;
     this.event.color = this.filtered[0].color;
     this.event.id = Math.floor((Math.random() * 300) + 1);
   }
 
   save() {
-    this.eventService.add(this.event).then(() => {
-      return console.log('ok');
+    if(this.formMode == 'new'){
+      this.eventService.add(this.event).then(() => {
+       return console.log('ok');
     }).then(() => {
-      //Limpar valor do form 
-      this.event = ''; 
-    });
+       //Limpar valor do form 
+       this.event = '';
+     });
+
+    }
+    else {
+      this.eventService.put(this.event).then(() => {
+            return console.log('ok');
+            //event.editing = false;
+          }).then(() => {
+            //Limpar valor do form 
+            this.event = '';
+          });
+    }
+
+    // this.eventService.getEvent(this.event.id).then((event) => {
+    //   let eventState = event[0];
+    //   console.log(eventState)
+
+    //   if(eventState == 'undefined'){
+    //     alert ('novo')
+    //   }
+    //   else{
+    //     alert('editando')
+    //   }
+    // });
+
+    // console.log(this.event)
+
+    // if(this.event == 'undefined'){
+    //   alert('ele nao existe na base, ele esta criando um novo')
+    // }
+    // else{
+    //   alert('ele existe na base, ele esta editando')
+    // }
+
+    // this.eventService.getEvent(this.event.id).then((event) => {
+    //   let eventState = event[0];
+
+    //   if(eventState == 'undefined'){
+    //     alert ('novo')
+    //   }
+    //   else{
+    //     alert('editando')
+    //   }
+    // });
+
+
+    // if (this.event.id == 'undefined' || (this.event.id == null)) {
+    //   alert('opa evento novo')
+    // }
+    // else {
+    //   alert('editando evento')
+    //   // return this.eventService.put(this.event).then(() => {
+    //   //   return console.log('ok');
+    //   //   //event.editing = false;
+    //   // }).then(() => {
+    //   //   //Limpar valor do form 
+    //   //   this.event = '';
+    //   // });
+    // }
 
     //teste
     this.eventService.get().then(dataSource => {
      console.log(dataSource)
     });
-    
-    //fechar modal 
-    this.activeModal.dismiss('ok');
+
+    this.activeModal.close("Submit");
 
   }
-  
+
   close() {
     //Validar Horario Igual
     let start = this.event.start.getHours() + ":" + this.event.start.getMinutes();
     let end = this.event.end.getHours() + ":" + this.event.end.getMinutes();
 
-    if( start == end){
+    if (start == end) {
       alert('Atenção os não podem ser iguais')
     }
 
-    //Verifica se ja existe um horario no array de eventos 
+    //Verifica se ja existe este horario no array de eventos 
     this.eventService.timeValidator(this.event).then((result) => {
       if (result) {
         alert('evento com este horario ja existe na base de dados')
@@ -158,28 +214,18 @@ export class EventFormComponent {
         alert('evento nao exista na base de dados')
       }
     });
-   
-   //Fecha Modal
+
+    //Fecha Modal
     this.activeModal.dismiss('ok');
   }
 
   ngOnInit() {
-    console.log(this.event);
-
-    //TODO se evento existe na base realizar update
-
-    //TODO se evento vim vazio criar novo registro na base 
+    console.log(this.event.id)
+    if (typeof this.event.id !== 'undefined'){
+       this.formMode = 'edit';
+    }
+    else{
+      this.formMode = 'new';
+    }
   }
-
-  //TODO
-  //Verificar se existe uma id
-  //caso nao exista criar um novo registo no array
-  //chegar se existe no banco algum registro na mesma data 
-
-  // TODO
-  //Se tiver Editando 
-  //Carregar os dados 
-  //Se salvar atualizar
-
-  //Mensagem de realizado com sucesso!
 }
