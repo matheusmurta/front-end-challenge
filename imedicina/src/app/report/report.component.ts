@@ -1,104 +1,68 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { CalendarComponent } from 'ng-fullcalendar';
-import { Options } from 'fullcalendar';
+import { Component, OnInit } from '@angular/core';
 import { EventService } from '../_services';
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { EventFormComponent } from '../event/event-form/event-form.component';
+import { EventRemoveComponent } from '../event/event-remove/event-remove.component';
+
 
 @Component({
   selector: 'app-report',
   templateUrl: './report.component.html',
-  styleUrls: ['./report.component.scss']
+  styleUrls: ['./report.component.scss'],
+  providers: [EventService]
 })
 export class ReportComponent implements OnInit {
 
-  calendarOptions: Options;
-  displayEvent: any;
-  events: any[] = []
- customObj : any;
-   @ViewChild(CalendarComponent) ucCalendar: CalendarComponent;
-   constructor(protected eventService: EventService) { }
+  public events;
+  public newEvent;
+  public event: any = {};
+  public displayEvent: any = {}
+
+  constructor(protected eventService: EventService,private modalService: NgbModal) { }
  
    ngOnInit() {
-    //  this.eventService.getEvents().subscribe(data => {
-       
-    //    this.events = data; 
- 
-    //    this.calendarOptions = {
-    //      editable: true,
-    //      eventLimit: false,
-    //      header: {
-    //        left: 'prev,next today',
-    //        center: 'title',
-    //        right: 'month,agendaWeek,agendaDay,listMonth'
-    //      },
-    //      events: data
-    //    };
-    //  });
-   }
-   clickButton(model: any) {
-     this.displayEvent = model;
-   }
-   eventClick(model: any) {
-     model = {
-       event: {
-         id: model.event.id,
-         start: model.event.start,
-         end: model.event.end,
-         title: model.event.title,
-         allDay: model.event.allDay
-         // other params
-       },
-       duration: {}
-     }
-     this.displayEvent = model;
-   }
-   updateEvent(model: any) {
-     model = {
-       event: {
-         id: model.event.id,
-         start: model.event.start,
-         end: model.event.end,
-         title: model.event.title
-         // other params
-       },
-       duration: {
-         _data: model.duration._data
-       }
-     }
-     this.displayEvent = model;
-   }
- 
-   add(){
- 
-   }
- 
-   update(){
- 
-   }
- 
-    AddItem() {   
-      alert('adicionar');
-          let customObj  = {
-             title: 'desgraça',
-             start: '2019-1-12T12:00:00',
-             color:'red',
-             status:'baladeira'
-           };
- 
-    this.events.push(customObj);   
- 
-    console.log(this.events); 
-    
-  }  
- 
-  remove(user) {  
-      //mandar a id e cadastrar
-      
-      alert(user.id)
-      console.log(this.events); 
- 
-   this.events.splice(user.id, 1);  
-   console.log(this.events); 
- 
- } 
+    this.getEvents();
+  }
 
+  getEvents() {
+    alert('peguei os eventos')
+    this.eventService.get().then(dataSource => {
+      this.events = dataSource
+    });
+  }
+
+  delete(status, id){
+    if (status == 'PROGRESS' || status == 'DONE') {
+      alert('Este evento não pode ser excluido')
+    }
+    else{
+      
+      const modalRef = this.modalService.open(EventRemoveComponent);
+      modalRef.componentInstance.id = id;
+      
+      modalRef.result.then((result) => {
+        `Closed with: ${result}`;
+        return this.getEvents();
+      }, (reason) => {
+        `Dismissed ${this.getDismissReason(reason)}`;
+      });
+      
+    }
+
+ 
+  }
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+    }
+  }
+
+  destroyEvent(id) {
+    
+  }
 }

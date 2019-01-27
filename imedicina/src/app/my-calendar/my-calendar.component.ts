@@ -4,7 +4,6 @@ import { Options } from 'fullcalendar';
 import { EventService } from '../_services';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 
-//import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { EventDetailComponent } from '../event/event-detail/event-detail.component';
 import { EventFormComponent } from '../event/event-form/event-form.component';
 
@@ -17,10 +16,6 @@ import { EventFormComponent } from '../event/event-form/event-form.component';
 })
 export class MyCalendarComponent implements OnInit {
 
-  // public user = {
-  //   name: 'Izzat Nadiri',
-  //   age: 26
-  // }
 
   public events;
   public newEvent;
@@ -116,70 +111,14 @@ export class MyCalendarComponent implements OnInit {
     });
   }
 
-  getEvent(id) {
-    this.eventService.getEvent(id).then((event) => {
-      this.event = event[0];
-    });
-
-  }
-
-  timeValidator() {
-    //valida se ja existe no array algum evento marcao neste horario
-
-  }
-
-  setColorState() {
-    //define a cor do status do evento 
-    switch (this.event.status) {
-      case 'FREE':
-        this.event.color = "blue";
-        break;
-      case 'BUSY':
-        this.event.color = "red";
-        break;
-      case 'PROGRESS':
-        this.event.color = "yellow";
-        break;
-      case 'DONE':
-        this.event.color = "green";
-        break;
-      // default: 
-      //     this.event.color = "blue";
-    }
-
-  }
-
-  destroyEvent(id) {
-    if (this.event.stats == 'PROGRESS' || this.event.stats == 'DONE') {
-      alert('Este evento não pode ser excluido')
-    }
-    this.eventService.delete(id).then(() => {
-      alert('Evento foi removido com sucesso!');
-      return this.getEvents();
-    });
-  }
+  // getEvent(id) {
+  //   this.eventService.getEvent(id).then((event) => {
+  //     this.event = event[0];
+  //   });
+  // }
 
   ngOnInit() {
-
     this.getEvents()
-
-    // this.eventService.timeValidator({
-    //   id: 1,
-    //   title: 'Consulta1',
-    //   start: '2039-01-01T01:00:00.000Z',
-    //   end: '2030-01-01T02:12:12.000Z',
-    //   status: 'free',
-    //   color: '#c5eff7',
-    // }).then((result) => {
-    //   if (result) {
-    //     alert('evento ja existe na base de dados')
-    //   }
-    //   else {
-    //     alert('evento nao exista na base de dados')
-    //   }
-
-    // });
-
   }
 
   clickButton(model: any) {
@@ -199,28 +138,23 @@ export class MyCalendarComponent implements OnInit {
     }
     const modalRef = this.modalService.open(EventDetailComponent);
     modalRef.componentInstance.event = model;
-    // modalRef.result.then((result) => {
-    //   console.log(result);
-    // }).catch((error) => {
-    //   console.log(error);
-    // });
 
     modalRef.result.then((result) => {
-       `Closed with: ${result}`;
+      `Closed with: ${result}`;
     }, (reason) => {
-       `Dismissed ${this.getDismissReason(reason)}`;
+      `Dismissed ${this.getDismissReason(reason)}`;
     });
 
   }
 
-  newtest(){
-     const modalRef = this.modalService.open(EventFormComponent);
+  newtest() {
+    const modalRef = this.modalService.open(EventFormComponent);
     modalRef.componentInstance.event = {};
 
     modalRef.result.then((result) => {
-       `Closed with: ${result}`;
+      `Closed with: ${result}`;
     }, (reason) => {
-       `Dismissed ${this.getDismissReason(reason)}`;
+      `Dismissed ${this.getDismissReason(reason)}`;
     });
   }
 
@@ -230,10 +164,10 @@ export class MyCalendarComponent implements OnInit {
     } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
       return 'by clicking on a backdrop';
     } else {
-      return  `with: ${reason}`;
+      return `with: ${reason}`;
     }
   }
-  
+
   updateEvent2(model: any) {
     model = {
       event: {

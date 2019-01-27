@@ -1,3 +1,22 @@
-<p>
-  event-remove works!
-</p>
+<div class="modal-content">
+
+  <!-- Modal Header -->
+  <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Aviso</h4>
+      <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+
+  <!-- Modal body -->
+  <div class="modal-body">
+    Deseja realmente remover este evento ?
+  </div>
+
+  <!-- Modal footer -->
+  <div class="modal-footer">
+    <button type="button" class="btn btn-danger" (click)="cancel()" data-dismiss="modal">Cancelar</button>
+    <button type="button" class="btn btn-success" (click)="delete()" data-dismiss="modal">Sim</button>
+  </div>
+
+</div>

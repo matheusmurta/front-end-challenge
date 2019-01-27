@@ -6,7 +6,7 @@ let events = [
         title: 'Consulta1',
         start: '2019-01-27T02:30:00',
         end: '2019-01-27T03:30:00',
-        status: 'free',
+        status: 'FREE',
         color: '#c5eff7',
     },
     {
@@ -14,7 +14,7 @@ let events = [
         title: 'Consulta2',
         start: '2019-01-27T05:10:00',
         end: '2019-01-27T06:40:00',
-        status: 'busy',
+        status: 'BUSY',
         color: '#d91e18',
     },
     {
@@ -22,7 +22,7 @@ let events = [
         title: 'Consulta3',
         start: '2019-01-27T04:00:00.000Z',
         end: '2019-01-27T05:12:12.000Z',
-        status: 'progress',
+        status: 'PROGRESS',
         color: '#ffff7e',
     },
     {
@@ -30,7 +30,7 @@ let events = [
         title: 'Consulta4',
         start: '2019-01-05T22:00:00.000Z',
         end: '2019-01-05T06:23:12.000Z',
-        status: 'progress',
+        status: 'PROGRESS',
         color: '#ffff7e',
     },
     {
@@ -38,7 +38,7 @@ let events = [
         title: 'Consulta444',
         start: '2019-01-06T18:00:00.000Z',
         end: '2019-01-01T06:19:12.000Z',
-        status: 'progress',
+        status: 'PROGRESS',
         color: '#ffff7e',
     }
 ];
