@@ -213,6 +213,17 @@ export class MyCalendarComponent implements OnInit {
 
   }
 
+  newtest(){
+     const modalRef = this.modalService.open(EventFormComponent);
+    modalRef.componentInstance.event = {};
+
+    modalRef.result.then((result) => {
+       `Closed with: ${result}`;
+    }, (reason) => {
+       `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+
   private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
       return 'by pressing ESC';
