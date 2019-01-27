@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, ChangeDetectionStrategy } from '@angular/
 import { CalendarComponent } from 'ng-fullcalendar';
 import { Options } from 'fullcalendar';
 import { EventService } from '../_services';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 
 //import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { EventDetailComponent } from '../event/event-detail/event-detail.component';
@@ -58,7 +58,7 @@ export class MyCalendarComponent implements OnInit {
         allDayText: 'Eventos do dia',
         allDaySlot: false,
         slotLabelFormat: "HH:mm",
-
+        //timezone: 'local',
         // axisFormat: 'HH:mm',
         buttonText: {
           prev: "<",
@@ -186,11 +186,12 @@ export class MyCalendarComponent implements OnInit {
     this.displayEvent = model;
   }
   eventClick(model: any) {
+
     model = {
       event: {
         id: model.event.id,
-        start: model.event.start,
-        end: model.event.end,
+        start: new Date(Date.parse(model.event.start)),
+        end: new Date(Date.parse(model.event.end)),
         title: model.event.title,
         status: model.event.status,
         color: model.event.color
@@ -198,13 +199,30 @@ export class MyCalendarComponent implements OnInit {
     }
     const modalRef = this.modalService.open(EventDetailComponent);
     modalRef.componentInstance.event = model;
+    // modalRef.result.then((result) => {
+    //   console.log(result);
+    // }).catch((error) => {
+    //   console.log(error);
+    // });
+
     modalRef.result.then((result) => {
-      console.log(result);
-    }).catch((error) => {
-      console.log(error);
+       `Closed with: ${result}`;
+    }, (reason) => {
+       `Dismissed ${this.getDismissReason(reason)}`;
     });
 
   }
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return  `with: ${reason}`;
+    }
+  }
+  
   updateEvent2(model: any) {
     model = {
       event: {
