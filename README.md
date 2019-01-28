@@ -9,7 +9,7 @@ https://nodejs.org/en/
 ```
 npm install -g @angular/cli
 ```
-## Execute comando na raiz do projeto para instalar as dependências  
+## Execute este comando na raiz do projeto para instalar as dependências  
 ```
 cd \imedicina
 npm i 
