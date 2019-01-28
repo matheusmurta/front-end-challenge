@@ -1,5 +1,7 @@
 ## Instruções de execução
 
+## Baixe ou clone este repositório 
+
 ## Instale o node.js
 https://nodejs.org/en/
 
@@ -7,7 +9,7 @@ https://nodejs.org/en/
 ```
 npm install -g @angular/cli
 ```
-## Execute na raiz do projeto 
+## Execute comando na raiz do projeto para instalar as dependências  
 ```
 cd \imedicina
 npm i 
