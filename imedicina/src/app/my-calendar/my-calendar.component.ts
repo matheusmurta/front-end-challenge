@@ -53,7 +53,7 @@ export class MyCalendarComponent implements OnInit {
         allDayText: 'Eventos do dia',
         allDaySlot: false,
         slotLabelFormat: "HH:mm",
-        //timezone: 'local',
+        timezone: 'local',
         // axisFormat: 'HH:mm',
         buttonText: {
           prev: "<",
@@ -73,6 +73,11 @@ export class MyCalendarComponent implements OnInit {
           right: 'prev,next,today '
         },
         defaultView: 'agendaWeek',
+        views : {
+          agendaWeek : {
+             columnFormat : "ddd DD/MM"
+          }
+       },
         events: dataSource
       };
     });
