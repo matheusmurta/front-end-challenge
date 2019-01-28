@@ -13,7 +13,7 @@ export class HomeComponent implements OnInit {
     showReport = false;
 
     constructor(private userService: UserService) {
-        this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        this.currentUser = JSON.parse(localStorage.getItem('currentUser'));1
     }
     
     Calendar(){
