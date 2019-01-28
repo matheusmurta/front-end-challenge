@@ -1,3 +1,6 @@
+
+Obs - Para uma visualização rápida, neste repositório criei umas gifs que simbolizam o resultado.  
+
 ## Instruções de execução
 
 ## Baixe ou clone este repositório 
@@ -31,3 +34,4 @@ Webpack em sua primeira execução demora um pouco para executar,a aplicação s
   - Design responsivo poderia ter sido explorado mais.
   - TDD 
   - Ajustar alguns plugins do webpack
+
