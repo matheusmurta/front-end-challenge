@@ -1,5 +1,5 @@
 
-Obs - Para uma visualização rápida, neste repositório criei umas gifs que simbolizam o resultado.  
+Obs - Para uma visualização rápida, criei umas gifs que simbolizam o resultado.  
 
 ## Instruções de execução
 
