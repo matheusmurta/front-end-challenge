@@ -18,7 +18,7 @@ cd \imedicina
 npm i 
 ```
 
-## Na raiz do projeto execumento o comando para executar a aplicação 
+## Na raiz do projeto execute o comando para executar a aplicação 
 ```
 npm start 
 ```
