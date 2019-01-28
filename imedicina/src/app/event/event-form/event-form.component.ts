@@ -71,17 +71,15 @@ export class EventFormComponent {
 
     if (start == end) {
       alert('Atenção os não podem ser iguais')
+      
     }
 
     //Verifica se ja existe este horario no array de eventos 
-    this.eventService.timeValidator(this.event).then((result) => {
-      if (result) {
-        alert('evento com este horario ja existe na base de dados')
-      }
-      else {
-        alert('evento nao exista na base de dados')
-      }
-    });
+    // this.eventService.timeValidator(this.event).then((result) => {
+    //   if (result) {
+    //     alert('evento com este horario ja existe na base de dados')
+    //   }
+    // });
 
     if(this.formMode == 'new'){
       this.eventService.add(this.event).then(() => {
