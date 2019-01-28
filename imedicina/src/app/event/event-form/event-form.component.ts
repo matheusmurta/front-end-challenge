@@ -35,11 +35,12 @@ export class EventFormComponent {
   selected: any;
   filtered: any;
   formMode: string;
+  formValid: boolean;
   stat = [
-    { value: "FREE", color: "blue" },
-    { value: "BUSY", color: "red" },
-    { value: "PROGRESS", color: "yellow" },
-    { value: "DONE", color: "green" }
+    { value: "FREE", color: "#6bb9f0" },
+    { value: "BUSY", color: "#e74c3c" },
+    { value: "PROGRESS", color: "#fef160" },
+    { value: "DONE", color: "#3fc380" }
   ];
 
   status = ['FREE', 'BUSY', 'PROGRESS', 'DONE'];
@@ -63,6 +64,25 @@ export class EventFormComponent {
   }
 
   save() {
+
+    //Validar Horario Igual
+    let start = this.event.start.getHours() + ":" + this.event.start.getMinutes();
+    let end = this.event.end.getHours() + ":" + this.event.end.getMinutes();
+
+    if (start == end) {
+      alert('Atenção os não podem ser iguais')
+    }
+
+    //Verifica se ja existe este horario no array de eventos 
+    this.eventService.timeValidator(this.event).then((result) => {
+      if (result) {
+        alert('evento com este horario ja existe na base de dados')
+      }
+      else {
+        alert('evento nao exista na base de dados')
+      }
+    });
+
     if(this.formMode == 'new'){
       this.eventService.add(this.event).then(() => {
        return console.log('ok');
@@ -86,27 +106,8 @@ export class EventFormComponent {
 
   }
 
-  close() {
-    //Validar Horario Igual
-    let start = this.event.start.getHours() + ":" + this.event.start.getMinutes();
-    let end = this.event.end.getHours() + ":" + this.event.end.getMinutes();
-
-    if (start == end) {
-      alert('Atenção os não podem ser iguais')
-    }
-
-    //Verifica se ja existe este horario no array de eventos 
-    this.eventService.timeValidator(this.event).then((result) => {
-      if (result) {
-        alert('evento com este horario ja existe na base de dados')
-      }
-      else {
-        alert('evento nao exista na base de dados')
-      }
-    });
-
-    //Fecha Modal
-    this.activeModal.dismiss('ok');
+  cancel(){
+    this.activeModal.dismiss("cancel");
   }
 
   ngOnInit() {

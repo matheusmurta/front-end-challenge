@@ -38,7 +38,6 @@
                 <th>Título</th>
                 <th>Início</th>
                 <th>Fim</th>
-                <th>Cor</th>
                 <th>Status</th>
                 <th>Ações</th>
 
@@ -49,15 +48,12 @@
                 <td>{{event.title}}</td>
                 <td>{{event.start | date: 'dd/MM/yyyy hh:mm ' }}</td>
                 <td>{{event.end | date: 'dd/MM/yyyy hh:mm'}}</td>
-                <td>
-                    <i class="fas fa-square fa-lg m-2"  [ngStyle]="{'color': event.color}"></i>
-                </td>
                 <td>{{event.status}}</td>
                 <td>
                     <div class="row">
                         <div class="col-xs-4">
-                            <i class="fas fa-times fa-lg  m-2" (click)="delete(event.status, event.id)"></i>
-                            <i class="far fa-edit fa-lg  m-2" (click)="edit(event)"></i>
+                            <i class="fas fa-times fa-lg  m-2" (click)="delete(event.status, event.id)" placement="top" ngbTooltip="Remover"></i>
+                            <i class="far fa-edit fa-lg  m-2" (click)="edit(event)" placement="top" ngbTooltip="Editar"></i>
                         </div>
                     </div>
                 </td>

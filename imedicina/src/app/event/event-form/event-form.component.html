@@ -8,7 +8,7 @@
 
 </div>
 <div class="modal-body">
-  <form>
+  <form #loginForm="ngForm"> 
     <div class="form-group">
       <label class="col-form-label">Título</label>
       <input class="form-control" [(ngModel)]="event.title" type="text" name="title" (ngModelChange)="event.title = $event">
@@ -17,7 +17,7 @@
       <label class="example-input-wrapper">
         Data e Horário de início:
         <input placeholder="Data e Hora" [(ngModel)]="event.start" [owlDateTimeTrigger]="dt" [owlDateTime]="dt" name="dt"
-          class="form-control">
+          class="form-control" required>
         <owl-date-time #dt name="dt"></owl-date-time>
       </label>
 
@@ -27,17 +27,17 @@
       <label class="example-input-wrapper">
         Data e Horário de Término :
         <input placeholder="Data e Hora" [(ngModel)]="event.end" [owlDateTimeTrigger]="dt2" [owlDateTime]="dt2" name="dt2"
-          class="form-control">
+          class="form-control" required>
         <owl-date-time #dt2 name="dt2"></owl-date-time>
       </label>
     </div>
     <label class="col-form-label">Status</label>
-    <select class="form-control" [(ngModel)]="event.status" name="status" placeholder="select" (ngModelChange)="onOptionsSelected()">
+    <select class="form-control" [(ngModel)]="event.status" name="status" placeholder="select" (ngModelChange)="onOptionsSelected()" required >
       <option *ngFor="let sta of status" [ngValue]="sta">{{sta}}</option>
     </select>
   </form>
 </div>
 <div class="modal-footer">
   <button type="button" class="btn btn-danger" (click)="cancel()" data-dismiss="modal">Cancelar</button>
-  <button type="button" class="btn btn-info" (click)="save()" data-dismiss="modal">Salvar</button>
+  <button type="button" [disabled]="loginForm.form.invalid" class="btn btn-info" (click)="save()" data-dismiss="modal">Salvar</button>
 </div>
