@@ -151,7 +151,6 @@ export class MyCalendarComponent implements OnInit {
 
     modalRef.result.then((result) => {
       `Closed with: ${result}`;
-      alert('fechou')
       this.ucCalendar.fullCalendar('removeEvents');
       
       this.eventService.get().then(dataSource => {

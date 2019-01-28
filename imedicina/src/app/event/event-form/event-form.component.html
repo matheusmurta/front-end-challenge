@@ -36,9 +36,6 @@
       <option *ngFor="let sta of status" [ngValue]="sta">{{sta}}</option>
     </select>
   </form>
-  <pre>
-    {{event | json}}
-  </pre>
 </div>
 <div class="modal-footer">
   <button type="button" class="btn btn-danger" (click)="cancel()" data-dismiss="modal">Cancelar</button>

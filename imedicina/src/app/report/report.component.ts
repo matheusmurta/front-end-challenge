@@ -30,7 +30,6 @@ export class ReportComponent implements OnInit {
 
     modalRef.result.then((result) => {
       `Closed with: ${result}`;
-      alert('fechou')
       return this.getEvents();
 
     }, (reason) => {

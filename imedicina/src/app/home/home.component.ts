@@ -9,8 +9,21 @@ export class HomeComponent implements OnInit {
     currentUser: User;
     users: User[] = [];
 
+    showCalendar = true;
+    showReport = false;
+
     constructor(private userService: UserService) {
         this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    }
+    
+    Calendar(){
+        this.showCalendar = true;
+        this.showReport = false;
+    }
+
+    Report(){
+        this.showCalendar = false;
+        this.showReport = true;
     }
 
     ngOnInit() {
