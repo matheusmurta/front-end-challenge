@@ -28,20 +28,6 @@ export class MyCalendarComponent implements OnInit {
   constructor(protected eventService: EventService, private modalService: NgbModal
   ) { }
 
-  openFormModal() {
-
-  }
-
-  // openDetailModal() {
-  //   const modalRef = this.modalService.open(EventFormComponent);
-  //   modalRef.componentInstance.user = this.user;
-  //   modalRef.result.then((result) => {
-  //     console.log(result);
-  //   }).catch((error) => {
-  //     console.log(error);
-  //   });
-  // }
-
   getEvents() {
     this.eventService.get().then(dataSource => {
       this.events = dataSource
@@ -70,7 +56,7 @@ export class MyCalendarComponent implements OnInit {
         header: {
           left: 'agendaWeek,agendaDay',
           center: 'title',
-          right: 'prev,next,today '
+          right: 'today,prev,next'
         },
         defaultView: 'agendaWeek',
         views : {
@@ -83,43 +69,6 @@ export class MyCalendarComponent implements OnInit {
     });
   }
 
-  addEvent() {
-    this.eventService.add(
-      {
-        id: this.event.id,
-        title: this.event.title,
-        start: this.event.start,
-        end: this.event.end,
-        status: this.event.status,
-        color: this.event.color,
-      }
-    ).then(() => {
-      return this.getEvents();
-    }).then(() => {
-      this.event = ''; // clear input form value
-    });
-  }
-
-  updateEvent(/*event, newValue*/) {
-    // event.id = newValue.id;
-    // event.title = newValue.title;
-    // event.title = newValue.start;
-    // event.title = newValue.end;
-    // event.title = newValue.status;
-    // event.title = newValue.color;
-
-    return this.eventService.put(this.event).then(() => {
-      //event.editing = false;
-      return this.getEvents();
-    });
-  }
-
-  // getEvent(id) {
-  //   this.eventService.getEvent(id).then((event) => {
-  //     this.event = event[0];
-  //   });
-  // }
-
   ngOnInit() {
     this.getEvents()
   }
@@ -128,7 +77,6 @@ export class MyCalendarComponent implements OnInit {
     this.displayEvent = model;
   }
   eventClick(model: any) {
-
     model = {
       event: {
         id: model.event.id,

@@ -1,22 +1,4 @@
-﻿<!-- <div class="bg-info">
-        <h1>Olá {{currentUser.firstName}}!</h1>
-
-        <ul>
-            <li *ngFor="let user of users">
-               Usuario - {{user.username}} ({{user.firstName}} {{user.lastName}})
-                - <a (click)="deleteUser(user.id)" class="text-danger">Delete</a>
-            </li>
-        </ul>
-        <p><a [routerLink]="['/login']">Sair</a></p>    
-</div>
- <div class="bg-light">
-  
-<app-sidebar></app-sidebar>
-
-</div> -->
-
-
-<nav class="navbar navbar-expand navbar-dark bg-blue static-top">
+﻿<nav class="navbar navbar-expand navbar-dark bg-blue static-top">
 
     <img class="navbar-brand mr-1" src="http://www.consultorio20.com.br/wp-content/uploads/2016/08/logo-horizontal-branco.png"
         height="50px" width="200px" alt="">
@@ -66,7 +48,6 @@
     </ul>
 
     <div id="content-wrapper">
-
         <div class="container-fluid">
                 <div *ngIf="showCalendar">
                         <app-my-calendar></app-my-calendar>
@@ -74,9 +55,7 @@
                    <div *ngIf="showReport" >
                        <app-report></app-report>
                    </div>
-
-            <!-- <app-my-calendar></app-my-calendar>
-            <app-report></app-report> -->
+           
         </div>
         <!-- /.container-fluid -->
 

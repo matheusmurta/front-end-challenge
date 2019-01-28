@@ -24,7 +24,6 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { HomeComponent } from './home/home.component';
 import { ReportComponent } from './report/report.component';
-import { SidebarComponent } from './sidebar/sidebar.component';
 import { MyCalendarComponent } from './my-calendar/my-calendar.component';
 import { EventFormComponent } from './event/event-form/event-form.component';
 import { EventDetailComponent } from './event/event-detail/event-detail.component';
@@ -50,7 +49,6 @@ declarations: [
     LoginComponent,
     RegisterComponent,
     ReportComponent, 
-    SidebarComponent, 
     MyCalendarComponent, EventFormComponent, EventDetailComponent, EventRemoveComponent
 ],
 providers: [
