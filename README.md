@@ -1,5 +1,7 @@
 ## Instruções de execução
 
+## Baixe ou clone este repositório 
+
 ## Instale o node.js
 https://nodejs.org/en/
 
